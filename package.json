@@ -1,0 +1,14 @@
+{
+  "name": "polymer-demo",
+  "version": "1.0.0",
+  "description": "Demo de las ventajas principales de Polymer 3",
+  "scripts": {
+    "start": "web-dev-server --node-resolve --open src/index.html"
+  },
+  "dependencies": {
+    "@polymer/polymer": "^3.5.1"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.4.6"
+  }
+}
