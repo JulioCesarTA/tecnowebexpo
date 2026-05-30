@@ -23,22 +23,36 @@
     <div class="cmp">
       <div class="bloque v">
         <div class="bh">HTML5 puro</div>
-        <pre><span class="kw">class</span> MiElem <span class="kw">extends</span> HTMLElement {
+        <pre><span class="cm">&lt;!-- HTML --&gt;</span>
+<span class="tag">&lt;mi-elemento&gt;&lt;/mi-elemento&gt;</span>
+
+<span class="kw">class</span> MiElem <span class="kw">extends</span> HTMLElement {
+  <span class="fn">constructor</span>() {
+    <span class="kw">super</span>();
+    <span class="kw">this</span>.<span class="fn">attachShadow</span>({ mode: <span class="str">'open'</span> });
+  }
   <span class="fn">connectedCallback</span>() {
-    <span class="cm">// props pueden NO estar listas</span>
+    <span class="cm">// props pueden NO estar listas aun</span>
     <span class="kw">this</span>.<span class="fn">render</span>(); <span class="cm">// DOM manual</span>
     <span class="kw">this</span>._timer = <span class="fn">setInterval</span>(() =&gt; {
       <span class="kw">this</span>.<span class="fn">render</span>(); <span class="cm">// re-render manual</span>
     }, <span class="pn">1000</span>);
   }
   <span class="fn">disconnectedCallback</span>() {
-    <span class="fn">clearInterval</span>(<span class="kw">this</span>._timer);
+    <span class="fn">clearInterval</span>(<span class="kw">this</span>._timer); <span class="cm">// limpiar manual</span>
   }
+  <span class="fn">render</span>() { <span class="kw">this</span>.shadowRoot.innerHTML = <span class="str">`...`</span>; }
 }</pre>
       </div>
       <div class="bloque p">
         <div class="bh">Polymer</div>
-        <pre><span class="kw">class</span> MiElem <span class="kw">extends</span> PolymerElement {
+        <pre><span class="cm">&lt;!-- HTML --&gt;</span>
+<span class="tag">&lt;mi-elemento&gt;&lt;/mi-elemento&gt;</span>
+
+<span class="kw">class</span> MiElem <span class="kw">extends</span> PolymerElement {
+  <span class="kw">static get</span> <span class="fn">properties</span>() {
+    <span class="kw">return</span> { contador: { type: Number, value: <span class="pn">0</span> } };
+  }
   <span class="fn">ready</span>() {
     <span class="kw">super</span>.<span class="fn">ready</span>();
     <span class="cm">// Shadow DOM + props 100% listos</span>

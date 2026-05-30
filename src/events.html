@@ -23,9 +23,12 @@
     <div class="cmp">
       <div class="bloque v">
         <div class="bh">HTML5 puro</div>
-        <pre><span class="cm">// JS hijo — dispara</span>
+        <pre><span class="cm">&lt;!-- HTML --&gt;</span>
+<span class="tag">&lt;mi-hijo</span> <span class="at">id=</span><span class="str">"hijo"</span><span class="tag">&gt;&lt;/mi-hijo&gt;</span>
+
+<span class="cm">// JS hijo — dispara sin composed:true</span>
 <span class="kw">this</span>.<span class="fn">dispatchEvent</span>(<span class="kw">new</span> <span class="fn">CustomEvent</span>(<span class="str">'mi-evento'</span>));
-<span class="cm">// sin composed:true → queda atrapado</span>
+<span class="cm">// queda atrapado en el Shadow DOM</span>
 
 <span class="cm">// JS padre — referencia directa obligatoria</span>
 <span class="kw">const</span> hijo = <span class="kw">this</span>.shadowRoot.<span class="fn">querySelector</span>(<span class="str">'#hijo'</span>);
@@ -35,15 +38,20 @@ hijo.<span class="fn">addEventListener</span>(<span class="str">'mi-evento'</spa
       </div>
       <div class="bloque p">
         <div class="bh">Polymer</div>
-        <pre><span class="cm">// JS hijo — dispara el evento</span>
+        <pre><span class="cm">&lt;!-- HTML padre — declarativo --&gt;</span>
+<span class="tag">&lt;mi-hijo</span> <span class="at">on-hijo-click=</span><span class="str">"_recibir"</span><span class="tag">&gt;&lt;/mi-hijo&gt;</span>
+
+<span class="cm">// JS hijo — dispara el evento</span>
 <span class="fn">_disparar</span>() {
   <span class="kw">this</span>.<span class="fn">dispatchEvent</span>(<span class="kw">new</span> <span class="fn">CustomEvent</span>(<span class="str">'hijo-click'</span>, {
     bubbles: <span class="kw">true</span>, composed: <span class="kw">true</span>
   }));
 }
 
-<span class="cm">&lt;!-- HTML padre — declarativo --&gt;</span>
-<span class="tag">&lt;mi-hijo</span> <span class="at">on-hijo-click=</span><span class="str">"_recibir"</span><span class="tag">&gt;&lt;/mi-hijo&gt;</span></pre>
+<span class="cm">// JS padre — recibe el evento</span>
+<span class="fn">_recibir</span>(e) {
+  console.<span class="fn">log</span>(<span class="str">'recibido:'</span>, e.detail);
+}</pre>
       </div>
     </div>
 
