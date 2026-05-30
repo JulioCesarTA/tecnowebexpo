@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lifecycle Hooks — Polymer 3</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <style> body { display: flex; } </style>
+</head>
+<body>
+  <navbar-component ruta="lifecycle"></navbar-component>
+  <main>
+    <h1>Lifecycle Hooks</h1>
+    <p class="sub">Metodos que Polymer ejecuta en momentos clave: creacion, montaje y desmontaje del componente.</p>
+
+    <div class="puntos">
+      <div class="punto" style="--pc:#1565c0"><b>Donde se usa</b><p>En cualquier componente donde necesites ejecutar codigo en un momento concreto: al crearse, al insertarse en el DOM o al quitarse.</p></div>
+      <div class="punto" style="--pc:#00897b"><b>Como se usa</b><p>Sobreescribiendo los metodos y llamando siempre <code>super.metodo()</code> primero. <code>ready()</code> para setup, <code>connectedCallback()</code> para timers, <code>disconnectedCallback()</code> para limpiarlos.</p></div>
+      <div class="punto" style="--pc:#6a1b9a"><b>Que hace</b><p><code>ready()</code> garantiza que el Shadow DOM y las propiedades estan 100% listos. <code>disconnectedCallback()</code> evita memory leaks al limpiar timers y listeners.</p></div>
+      <div class="punto" style="--pc:#e65100"><b>vs HTML5 puro</b><p>HTMLElement no tiene <code>ready()</code>. El <code>connectedCallback</code> nativo puede ejecutarse antes de que las propiedades esten inicializadas.</p></div>
+    </div>
+
+    <div class="cmp">
+      <div class="bloque v">
+        <div class="bh">HTML5 puro</div>
+        <pre><span class="kw">class</span> MiElem <span class="kw">extends</span> HTMLElement {
+  <span class="fn">connectedCallback</span>() {
+    <span class="cm">// props pueden NO estar listas</span>
+    <span class="kw">this</span>.<span class="fn">render</span>(); <span class="cm">// DOM manual</span>
+    <span class="kw">this</span>._timer = <span class="fn">setInterval</span>(() =&gt; {
+      <span class="kw">this</span>.<span class="fn">render</span>(); <span class="cm">// re-render manual</span>
+    }, <span class="pn">1000</span>);
+  }
+  <span class="fn">disconnectedCallback</span>() {
+    <span class="fn">clearInterval</span>(<span class="kw">this</span>._timer);
+  }
+}</pre>
+      </div>
+      <div class="bloque p">
+        <div class="bh">Polymer</div>
+        <pre><span class="kw">class</span> MiElem <span class="kw">extends</span> PolymerElement {
+  <span class="fn">ready</span>() {
+    <span class="kw">super</span>.<span class="fn">ready</span>();
+    <span class="cm">// Shadow DOM + props 100% listos</span>
+  }
+  <span class="fn">connectedCallback</span>() {
+    <span class="kw">super</span>.<span class="fn">connectedCallback</span>();
+    <span class="kw">this</span>._timer = <span class="fn">setInterval</span>(() =&gt; {
+      <span class="kw">this</span>.contador++; <span class="cm">// UI se actualiza sola</span>
+    }, <span class="pn">1000</span>);
+  }
+  <span class="fn">disconnectedCallback</span>() {
+    <span class="kw">super</span>.<span class="fn">disconnectedCallback</span>();
+    <span class="fn">clearInterval</span>(<span class="kw">this</span>._timer);
+  }
+}</pre>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="dt">Demo interactivo</div>
+      <lifecycle-demo-view></lifecycle-demo-view>
+    </div>
+  </main>
+
+  <script type="module" src="components/navbar-component.js"></script>
+  <script type="module" src="components/lifecycle-demo.js"></script>
+</body>
+</html>

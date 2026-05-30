@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Events — Polymer 3</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <style> body { display: flex; } </style>
+</head>
+<body>
+  <navbar-component ruta="events"></navbar-component>
+  <main>
+    <h1>Custom Events</h1>
+    <p class="sub">Comunicacion entre componentes usando eventos que cruzan el Shadow DOM.</p>
+
+    <div class="puntos">
+      <div class="punto" style="--pc:#1565c0"><b>Donde se usa</b><p>Cuando un componente hijo necesita comunicar algo al padre: un boton presionado, un valor cambiado, una accion completada.</p></div>
+      <div class="punto" style="--pc:#00897b"><b>Como se usa</b><p>El hijo llama <code>dispatchEvent(new CustomEvent(...))</code> con <code>composed: true</code>. El padre escucha con <code>on-nombre="_handler"</code> directo en el template.</p></div>
+      <div class="punto" style="--pc:#6a1b9a"><b>Que hace</b><p><code>composed: true</code> permite que el evento salga del Shadow DOM del hijo y suba por el arbol hasta el padre. Sin esto queda atrapado adentro.</p></div>
+      <div class="punto" style="--pc:#e65100"><b>vs HTML5 puro</b><p>En vanilla los eventos no cruzan el Shadow DOM. Hay que obtener una referencia directa al hijo con <code>querySelector</code> y agregarle un listener a mano.</p></div>
+    </div>
+
+    <div class="cmp">
+      <div class="bloque v">
+        <div class="bh">HTML5 puro</div>
+        <pre><span class="cm">// JS hijo — dispara</span>
+<span class="kw">this</span>.<span class="fn">dispatchEvent</span>(<span class="kw">new</span> <span class="fn">CustomEvent</span>(<span class="str">'mi-evento'</span>));
+<span class="cm">// sin composed:true → queda atrapado</span>
+
+<span class="cm">// JS padre — referencia directa obligatoria</span>
+<span class="kw">const</span> hijo = <span class="kw">this</span>.shadowRoot.<span class="fn">querySelector</span>(<span class="str">'#hijo'</span>);
+hijo.<span class="fn">addEventListener</span>(<span class="str">'mi-evento'</span>, (e) =&gt; {
+  console.<span class="fn">log</span>(<span class="str">'recibido'</span>, e);
+});</pre>
+      </div>
+      <div class="bloque p">
+        <div class="bh">Polymer</div>
+        <pre><span class="cm">// JS hijo — dispara el evento</span>
+<span class="fn">_disparar</span>() {
+  <span class="kw">this</span>.<span class="fn">dispatchEvent</span>(<span class="kw">new</span> <span class="fn">CustomEvent</span>(<span class="str">'hijo-click'</span>, {
+    bubbles: <span class="kw">true</span>, composed: <span class="kw">true</span>
+  }));
+}
+
+<span class="cm">&lt;!-- HTML padre — declarativo --&gt;</span>
+<span class="tag">&lt;mi-hijo</span> <span class="at">on-hijo-click=</span><span class="str">"_recibir"</span><span class="tag">&gt;&lt;/mi-hijo&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="dt">Demo interactivo</div>
+      <events-demo></events-demo>
+    </div>
+  </main>
+
+  <script type="module" src="components/navbar-component.js"></script>
+  <script type="module" src="components/events-demo.js"></script>
+</body>
+</html>

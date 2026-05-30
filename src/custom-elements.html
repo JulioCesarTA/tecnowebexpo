@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Elements — Polymer 3</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <style> body { display: flex; } </style>
+</head>
+<body>
+  <navbar-component ruta="custom-elements"></navbar-component>
+  <main>
+    <h1>Custom Elements</h1>
+    <p class="sub">Define tus propias etiquetas HTML reutilizables con comportamiento y estilos propios.</p>
+
+    <div class="puntos">
+      <div class="punto" style="--pc:#1565c0"><b>Donde se usa</b><p>Cuando queres crear una etiqueta HTML propia que encapsule logica, estilos y template reutilizable en cualquier parte de la app.</p></div>
+      <div class="punto" style="--pc:#00897b"><b>Como se usa</b><p>Extendiendo <code>PolymerElement</code> y llamando <code>customElements.define('mi-elem', MiClase)</code>. Despues usas <code>&lt;mi-elem&gt;</code> como cualquier etiqueta HTML.</p></div>
+      <div class="punto" style="--pc:#6a1b9a"><b>Que hace</b><p>Registra un nuevo elemento en el navegador con su propio Shadow DOM, estilos aislados y propiedades reactivas.</p></div>
+      <div class="punto" style="--pc:#e65100"><b>vs HTML5 puro</b><p>En vanilla tenes que gestionar manualmente el Shadow DOM, el template, los atributos y el ciclo de vida. Polymer lo hace declarativo.</p></div>
+    </div>
+
+    <div class="cmp">
+      <div class="bloque v">
+        <div class="bh">HTML5 puro</div>
+        <pre><span class="kw">class</span> MiTarjeta <span class="kw">extends</span> HTMLElement {
+  <span class="fn">constructor</span>() {
+    <span class="kw">super</span>();
+    <span class="kw">this</span>.<span class="fn">attachShadow</span>({ mode: <span class="str">'open'</span> });
+  }
+  <span class="kw">static get</span> <span class="fn">observedAttributes</span>() {
+    <span class="kw">return</span> [<span class="str">'nombre'</span>];
+  }
+  <span class="fn">attributeChangedCallback</span>(attr, old, nuevo) {
+    <span class="kw">this</span>.shadowRoot.innerHTML =
+      <span class="str">`&lt;p&gt;Hola, ${nuevo}&lt;/p&gt;`</span>;
+  }
+}
+<span class="fn">customElements</span>.<span class="fn">define</span>(<span class="str">'mi-tarjeta'</span>, MiTarjeta);</pre>
+      </div>
+      <div class="bloque p">
+        <div class="bh">Polymer</div>
+        <pre><span class="kw">class</span> MiTarjeta <span class="kw">extends</span> PolymerElement {
+  <span class="kw">static get</span> <span class="fn">template</span>() {
+    <span class="kw">return</span> <span class="fn">html</span>`<span class="tag">&lt;p&gt;</span>Hola, [[nombre]]<span class="tag">&lt;/p&gt;</span>`;
+  }
+  <span class="kw">static get</span> <span class="fn">properties</span>() {
+    <span class="kw">return</span> { nombre: { type: String } };
+  }
+}
+<span class="fn">customElements</span>.<span class="fn">define</span>(<span class="str">'mi-tarjeta'</span>, MiTarjeta);</pre>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="dt">Demo interactivo</div>
+      <custom-elements-demo></custom-elements-demo>
+    </div>
+  </main>
+
+  <script type="module" src="components/navbar-component.js"></script>
+  <script type="module" src="components/custom-elements-demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Properties — Polymer 3</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <style> body { display: flex; } </style>
+</head>
+<body>
+  <navbar-component ruta="properties"></navbar-component>
+  <main>
+    <h1>Properties</h1>
+    <p class="sub">Sistema declarativo con tipo, valor, computed y observer.</p>
+
+    <div class="puntos">
+      <div class="punto" style="--pc:#1565c0"><b>Donde se usa</b><p>En <code>static get properties()</code>. Toda propiedad reactiva que deba actualizar el DOM al cambiar se declara ahi.</p></div>
+      <div class="punto" style="--pc:#00897b"><b>Como se usa</b><p>Cada propiedad es un objeto con claves como <code>type</code>, <code>value</code>, <code>observer</code> y <code>computed</code>. Polymer se encarga del resto.</p></div>
+      <div class="punto" style="--pc:#6a1b9a"><b>Que hace</b><p>Cuando una propiedad cambia, Polymer actualiza el DOM, recalcula los <code>computed</code> y dispara los <code>observer</code> automaticamente.</p></div>
+      <div class="punto" style="--pc:#e65100"><b>vs HTML5 puro</b><p>En vanilla necesitas getters/setters manuales, llamar <code>render()</code> a mano y recalcular derivados en cada cambio. Mucho codigo repetido.</p></div>
+    </div>
+
+    <div class="cmp">
+      <div class="bloque v">
+        <div class="bh">HTML5 puro</div>
+        <pre><span class="cm">&lt;!-- HTML --&gt;</span>
+<span class="tag">&lt;p</span> <span class="at">id=</span><span class="str">"num"</span><span class="tag">&gt;0&lt;/p&gt;</span>
+<span class="tag">&lt;button</span> <span class="at">id=</span><span class="str">"btnMas"</span><span class="tag">&gt;</span>+ Sumar<span class="tag">&lt;/button&gt;</span>
+
+<span class="cm">// JavaScript</span>
+<span class="kw">let</span> contador = <span class="pn">0</span>;
+<span class="kw">const</span> num = document.<span class="fn">querySelector</span>(<span class="str">'#num'</span>);
+
+<span class="fn">function</span> <span class="fn">render</span>() {
+  num.textContent = contador; <span class="cm">// DOM manual</span>
+}
+document.<span class="fn">querySelector</span>(<span class="str">'#btnMas'</span>)
+  .<span class="fn">addEventListener</span>(<span class="str">'click'</span>, () =&gt; { contador++; <span class="fn">render</span>(); });</pre>
+      </div>
+      <div class="bloque p">
+        <div class="bh">Polymer</div>
+        <pre><span class="cm">&lt;!-- HTML --&gt;</span>
+<span class="tag">&lt;p&gt;</span>[[contador]]<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;button</span> <span class="at">on-click=</span><span class="str">"_mas"</span><span class="tag">&gt;</span>+ Sumar<span class="tag">&lt;/button&gt;</span>
+
+<span class="cm">// JavaScript</span>
+<span class="kw">static get</span> <span class="fn">properties</span>() {
+  <span class="kw">return</span> {
+    contador: { type: Number, value: <span class="pn">0</span> }
+  };
+}
+<span class="fn">_mas</span>() { <span class="kw">this</span>.contador++; }</pre>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="dt">Demo interactivo</div>
+      <properties-demo></properties-demo>
+    </div>
+  </main>
+
+  <script type="module" src="components/navbar-component.js"></script>
+  
+<script type="module" src="components/properties-demo.js"></script>  <!-- un solo import -->
+</body>
+</html>
