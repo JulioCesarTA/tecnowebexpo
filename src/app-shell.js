@@ -2,6 +2,7 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/polymer/lib/elements/dom-if.js';
 import './router/router.js';
 import './components/navbar-component.js';
+import './views/custom-elements-view.js';
 import './views/databinding-view.js';
 import './views/properties-view.js';
 import './views/events-view.js';
@@ -19,6 +20,7 @@ class AppShell extends PolymerElement {
       <navbar-component ruta="[[ruta]]"></navbar-component>
 
       <main>
+        <template is="dom-if" if="[[_es('custom-elements', ruta)]]"><custom-elements-view></custom-elements-view></template>
         <template is="dom-if" if="[[_es('databinding', ruta)]]"><databinding-view></databinding-view></template>
         <template is="dom-if" if="[[_es('properties',  ruta)]]"><properties-view></properties-view></template>
         <template is="dom-if" if="[[_es('events',      ruta)]]"><events-view></events-view></template>

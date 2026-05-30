@@ -17,7 +17,8 @@ class NavbarComponent extends PolymerElement {
       <div class="logo">Polymer <span>3</span></div>
 
       <div class="seccion">Ventajas</div>
-      <a href="#databinding" class$="[[_cls('databinding', ruta)]]"><span class="ic">↔</span> Data Binding</a>
+      <a href="#custom-elements" class$="[[_cls('custom-elements', ruta)]]"><span class="ic">⬡</span> Custom Elements</a>
+      <a href="#databinding"     class$="[[_cls('databinding',     ruta)]]"><span class="ic">↔</span> Data Binding</a>
       <a href="#properties"  class$="[[_cls('properties',  ruta)]]"><span class="ic">#</span> Properties</a>
       <a href="#events"      class$="[[_cls('events',      ruta)]]"><span class="ic">→</span> Events</a>
       <a href="#lifecycle"   class$="[[_cls('lifecycle',   ruta)]]"><span class="ic">◎</span> Lifecycle</a>
