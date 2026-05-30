@@ -1,0 +1,48 @@
+POR QUE USAR POLYMER Y NO ANGULAR
+==================================
+
+1. ESTANDARES DEL NAVEGADOR
+   - Polymer usa Web Components nativos (Custom Elements + Shadow DOM),
+     estandares oficiales que el navegador entiende directamente.
+   - Angular usa su propio sistema de componentes con decoradores y un
+     compilador propio (Ivy). El navegador no los entiende sin compilacion.
+
+2. PESO Y COMPLEJIDAD
+   - Polymer: libreria ligera, facil de arrancar, sin configuracion compleja.
+   - Angular: framework completo y pesado. Para un proyecto simple necesitas
+     Angular CLI, TypeScript obligatorio, modulos, decoradores, inyeccion
+     de dependencias — mucho overhead desde el dia 1.
+
+3. CURVA DE APRENDIZAJE
+   - Polymer: con HTML, CSS y JS basico ya creas componentes funcionales.
+   - Angular: necesitas aprender TypeScript, decoradores (@Component, @NgModule,
+     @Injectable), RxJS, el sistema de modulos, pipes, servicios, guards...
+     Es uno de los frameworks mas dificiles de dominar.
+
+4. TYPESCRIPT OBLIGATORIO
+   - Angular fuerza el uso de TypeScript en todo el proyecto, sin excepcion.
+   - Polymer funciona con JavaScript puro. Puedes agregar TypeScript si quieres,
+     pero no es un requisito.
+
+5. REUTILIZACION ENTRE PROYECTOS
+   - Un componente Polymer funciona en cualquier tecnologia: HTML puro, Vue,
+     React, Laravel, Symfony — sin cambiar nada.
+   - Un componente Angular solo vive dentro de Angular. Fuera de el, no sirve.
+
+6. ENCAPSULAMIENTO
+   - Polymer usa Shadow DOM real: estilos y logica 100% aislados por estandar.
+   - Angular tiene ViewEncapsulation, pero es una simulacion propia, no
+     Shadow DOM real (a menos que lo configures explicitamente).
+
+7. ACTUALIZACIONES BREAKING
+   - Angular tiene historico de cambios breaking entre versiones (AngularJS a
+     Angular 2 fue una reescritura total). Migrar es costoso.
+   - Polymer se apoya en estandares del navegador que evolucionan con
+     compatibilidad hacia atras.
+
+CONCLUSION
+----------
+Angular es un framework empresarial completo para aplicaciones grandes con
+equipos grandes. Polymer es la eleccion cuando quieres componentes web
+estandar, sin la complejidad de un framework completo, reutilizables en
+cualquier contexto tecnologico.

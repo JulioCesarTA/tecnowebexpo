@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Ejemplo — Custom Element</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f0f2f5; padding: 40px; }
+    h2 { font-size: 14px; color: #607d8b; margin-bottom: 20px; }
+    .cards { display: flex; gap: 16px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+
+  <h2>Custom Element </h2>
+
+  <div class="cards">
+    <tarjeta-usuario nombre="Ana" rol="Frontend Dev" color="#3f51b5"></tarjeta-usuario>
+    <tarjeta-usuario nombre="Luis" rol="Backend Dev" color="#00897b"></tarjeta-usuario>
+    <tarjeta-usuario nombre="Sara" rol="UX Designer"  color="#e65100"></tarjeta-usuario>
+  </div>
+
+  <script type="module" src="components/tarjeta-usuario.js"></script>
+</body>
+</html>
+
+

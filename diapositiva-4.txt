@@ -1,0 +1,51 @@
+TÍTULO: Estructura de un componente Polymer
+
+──────────────────────────────────────────────
+
+SUBTÍTULO: Todo en un solo archivo JS, listo para usar en cualquier HTML.
+
+──────────────────────────────────────────────
+
+BLOQUE DE CÓDIGO (mostrar en la diapo):
+
+// mi-componente.js
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+
+class MiComponente extends PolymerElement {
+
+  static get template() {
+    return html`
+      <style> /* estilos aislados (Shadow DOM) */ </style>
+      <p>Hola, [[nombre]]</p>
+    `;
+  }
+
+  static get properties() {
+    return {
+      nombre: { type: String, value: 'Mundo' }
+    };
+  }
+
+}
+
+customElements.define('mi-componente', MiComponente);
+
+──────────────────────────────────────────────
+
+USO EN CUALQUIER HTML:
+
+<script type="module" src="mi-componente.js"></script>
+
+<mi-componente nombre="Ana"></mi-componente>
+<mi-componente nombre="Luis"></mi-componente>
+<mi-componente nombre="Sara"></mi-componente>
+
+──────────────────────────────────────────────
+
+PUNTOS CLAVE (bullets):
+
+• template()   → define el HTML y estilos del componente
+• properties() → declara los datos reactivos
+• customElements.define() → registra la etiqueta en el navegador
+• Cada instancia tiene su propio estado independiente
+• Se importa una vez, se usa en cualquier cantidad de páginas

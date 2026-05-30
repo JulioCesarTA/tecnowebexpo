@@ -1,0 +1,49 @@
+POR QUE USAR POLYMER Y NO REACT
+================================
+
+1. ESTANDARES DEL NAVEGADOR
+   - Polymer usa Web Components (Custom Elements + Shadow DOM), que son estandares
+     oficiales del W3C. El navegador los entiende de forma nativa.
+   - React usa JSX y un Virtual DOM propio — el navegador no los entiende,
+     necesita ser "traducido" antes de ejecutarse.
+
+2. SIN DEPENDENCIAS PESADAS
+   - Polymer: libreria ligera, los componentes corren directo en el navegador.
+   - React: necesitas React + ReactDOM + Babel + Webpack (o Vite) solo para arrancar.
+     El bundle puede pesar varios MB antes de escribir una sola linea tuya.
+
+3. COMPONENTES VERDADERAMENTE REUTILIZABLES
+   - Un componente Polymer funciona en cualquier proyecto: con Angular, con Vue,
+     con Laravel, con HTML puro — sin cambiar nada.
+   - Un componente React solo funciona dentro de React. Si cambias de framework,
+     lo reescribes desde cero.
+
+4. ENCAPSULAMIENTO REAL (SHADOW DOM)
+   - Polymer usa Shadow DOM: los estilos y la logica del componente estan 100%
+     aislados. El CSS de afuera no rompe el componente y viceversa.
+   - React no tiene encapsulamiento real de estilos por defecto. Necesitas
+     CSS Modules, Styled Components u otras soluciones externas para lograrlo.
+
+5. CURVA DE APRENDIZAJE
+   - Polymer: si sabes HTML, CSS y JS basico, ya puedes crear componentes.
+   - React: necesitas aprender JSX, hooks (useState, useEffect, useContext...),
+     el ciclo de vida del componente, y el ecosistema (Redux, React Router, etc.).
+
+6. LONGEVIDAD
+   - Los Web Components son un estandar — no van a desaparecer porque una empresa
+     decida cambiar de direccion.
+   - React depende de Meta (Facebook). Si Meta deja de mantenerlo o cambia la
+     licencia, el ecosistema entero queda en riesgo.
+
+7. INTEGRACION CON MATERIAL DESIGN
+   - Polymer nacio junto a Material Design de Google. Los componentes de
+     @polymer/paper-* ya implementan Material Design sin configuracion extra.
+   - En React necesitas instalar librerias externas (MUI, Ant Design, etc.)
+     que tienen su propia API que tambien hay que aprender.
+
+CONCLUSION
+----------
+Polymer es la eleccion correcta cuando quieres componentes web estandar,
+ligeros, reutilizables en cualquier tecnologia y alineados con el futuro
+de la web. React es poderoso, pero te ata a su ecosistema y agrega
+complejidad que muchas veces no necesitas.

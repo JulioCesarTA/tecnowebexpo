@@ -1,0 +1,54 @@
+POR QUE USAR POLYMER Y NO JQUERY
+=================================
+
+1. PARADIGMA COMPLETAMENTE DIFERENTE
+   - jQuery: manipulas el DOM manualmente, elemento por elemento.
+     Tu dices "busca este div y cambia su texto".
+   - Polymer: usas data binding. Cambias el dato y la vista se actualiza
+     sola automaticamente. No tocas el DOM directamente.
+
+2. COMPONENTES REUTILIZABLES
+   - jQuery no tiene concepto de componente. Todo es codigo suelto
+     que manipula elementos del HTML — dificil de reutilizar y mantener.
+   - Polymer te permite crear tus propias etiquetas HTML reutilizables
+     (<tarjeta-usuario>, <mi-boton>, etc.) con logica y estilos incluidos.
+
+3. ENCAPSULAMIENTO
+   - jQuery: cero encapsulamiento. El CSS y el JS de una parte de la
+     pagina puede afectar (y romper) otra parte facilmente.
+   - Polymer usa Shadow DOM: cada componente tiene sus propios estilos
+     y logica completamente aislados del resto de la pagina.
+
+4. MANTENIBILIDAD
+   - Un proyecto jQuery grande se convierte en "sopa de selectores":
+     $('#btn').on('click', ...), $('.card').find('span').text(...)...
+     Dificil de leer, dificil de mantener.
+   - Polymer organiza el codigo en componentes independientes con
+     responsabilidades claras. Mas facil de mantener y escalar.
+
+5. ACTUALIZACION AUTOMATICA DE LA VISTA
+   - jQuery: cada vez que cambia un dato, tienes que actualizar el DOM
+     manualmente con codigo extra.
+   - Polymer: el sistema de data binding actualiza la vista automaticamente
+     cuando el dato cambia. Menos codigo, menos errores.
+
+6. MODERNIDAD
+   - jQuery fue creado en 2006 para resolver inconsistencias entre
+     navegadores. Hoy los navegadores son consistentes — jQuery perdio
+     su razon principal de existir.
+   - Polymer usa estandares modernos (ES Modules, Custom Elements, Shadow DOM)
+     que representan el futuro de la web.
+
+7. PESO VS UTILIDAD
+   - jQuery agrega ~87KB para darte acceso a selectores y utilidades
+     que hoy ya vienen nativas en el navegador (querySelector, fetch, etc.).
+   - Polymer es ligero y te da un sistema de componentes completo que
+     jQuery simplemente no puede ofrecer.
+
+CONCLUSION
+----------
+jQuery fue revolucionario en su epoca, pero hoy es una herramienta del
+pasado. Polymer representa el modelo moderno de desarrollo web: componentes
+encapsulados, data binding, y estandares nativos del navegador. Si ya
+sabes jQuery, aprender Polymer es el siguiente paso logico hacia la
+web moderna.

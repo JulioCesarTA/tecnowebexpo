@@ -1,0 +1,50 @@
+POR QUE USAR POLYMER Y NO VUE
+==============================
+
+1. ESTANDARES DEL NAVEGADOR
+   - Polymer usa Web Components nativos (Custom Elements + Shadow DOM),
+     estandares del W3C que el navegador entiende directamente.
+   - Vue usa su propio sistema de componentes (.vue files). El navegador
+     no los entiende sin un paso de compilacion previo.
+
+2. REUTILIZACION REAL
+   - Un componente Polymer funciona en cualquier proyecto sin importar
+     el framework: Angular, React, HTML puro, Laravel — sin adaptaciones.
+   - Un componente Vue (.vue) solo funciona dentro de un proyecto Vue.
+     Reutilizarlo en otro framework implica reescribirlo.
+
+3. ENCAPSULAMIENTO DE ESTILOS
+   - Polymer usa Shadow DOM: el CSS del componente esta completamente
+     aislado del resto de la pagina por estandar del navegador.
+   - Vue tiene "scoped styles" que simulan aislamiento agregando atributos
+     al HTML, pero no es Shadow DOM real — puede tener filtraciones.
+
+4. SIN BUILD OBLIGATORIO
+   - Polymer puede usarse directamente en el navegador con ES Modules,
+     sin necesidad de Webpack, Vite u otro bundler para desarrollo.
+   - Vue en la practica siempre requiere Vue CLI o Vite para manejar
+     los archivos .vue y compilarlos.
+
+5. CURVA DE APRENDIZAJE
+   - Polymer: si conoces HTML, CSS y JS, ya puedes crear componentes.
+   - Vue: necesitas aprender la Options API o Composition API, directivas
+     (v-if, v-for, v-model), el sistema de props/emits, Vuex o Pinia
+     para estado global, Vue Router, etc.
+
+6. DEPENDENCIA DE UN TERCERO
+   - Vue es mantenido por Evan You y la comunidad. Si el proyecto pierde
+     traccion o financiamiento, el ecosistema sufre.
+   - Polymer se basa en estandares W3C. Los estandares no desaparecen
+     porque alguien deje de mantenerlos.
+
+7. INTEGRACION CON GOOGLE
+   - Polymer fue creado por Google y esta alineado con Material Design
+     y las herramientas del ecosistema Google (Firebase, PWA, etc.).
+   - Vue no tiene integracion especial con ninguna plataforma en particular.
+
+CONCLUSION
+----------
+Vue es una buena opcion para SPAs con equipos que quieren un framework
+progresivo y amigable. Polymer es la eleccion cuando el objetivo es crear
+componentes web estandar, portables, que funcionen en cualquier contexto
+sin depender de un ecosistema especifico.
